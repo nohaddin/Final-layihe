@@ -1,3 +1,5 @@
+
+
 let all =document.querySelector(".hamisi-button")
 let fri =document.querySelector(".fri-button")
 let marakon =document.querySelector(".marakon-button")
@@ -69,42 +71,67 @@ let array = [
         sekil:"./images/f9.png"
     }
 ];
+
 let bigDiv =document.querySelector(".menu-item")
-array.forEach(item => {
-    let div = document.createElement("div");
-    div.classList.add("js-div")
-    div.id=item.id
-    let div1 = document.createElement("div");
-    div1.classList.add("js-div1")
-    div.append(div1);
-    let img = document.createElement("img");
-    img.classList.add("js-img")
-    img.src = item.sekil;
-    div1.append(img);
-    let isim =document.createElement("p");
-    isim.innerText = item.ad;
-    div.append(isim);
-    let div2 = document.createElement("div");
-    div2.classList.add("js-div2")
-    div.append(div2);
-    let h2 = document.createElement("h3");
-    div2.append(h2);
-    h2.innerText=item.qiymet
-    let span = document.createElement("div");
-    span.classList.add("js-span")
-    span.innerText=("+")
-    div2.append(span);
-    bigDiv.append(div);
-   
-})
-pizza.addEventListener("click" ,()=>{
-    e.preventDefault
-    let pizzas = array.filter((item)=>{
-console.log(pizzaObiyekt);
-        return item.tip == "pizza";
-    })
-    pizzas.forEach(item=>{
+function updateItems(arr) {
+    bigDiv.innerHTML = "";
+    arr.forEach(item => {
+        let div = document.createElement("div");
+        div.classList.add("js-div")
+        div.id=item.id
+        let div1 = document.createElement("div");
+        div1.classList.add("js-div1")
+        div.append(div1);
+        let img = document.createElement("img");
+        img.classList.add("js-img")
+        img.src = item.sekil;
+        div1.append(img);
+        let isim =document.createElement("p");
+        isim.innerText = item.ad;
+        div.append(isim);
+        let div2 = document.createElement("div");
+        div2.classList.add("js-div2")
+        div.append(div2);
+        let h2 = document.createElement("h3");
+        div2.append(h2);
+        h2.innerText=item.qiymet
+        let span = document.createElement("div");
+        span.classList.add("js-span")
+        span.innerText=("+")
+        div2.append(span);
+        bigDiv.append(div);
        
     })
+    pizza.addEventListener("click" ,(e)=>{
+        e.preventDefault
+        let pizzas = array.filter((item)=>{
+            return item.tip == "pizza";
+        })
+        
+    }
+    )
 }
-)
+
+updateItems(array);
+all.addEventListener("click",(e) => {
+    e.preventDefault();
+    updateItems(array)
+})
+
+fri.addEventListener("click",(e) => {
+    e.preventDefault()
+    updateItems(array.filter(a => a.tip=="Fries"))
+})
+marakon.addEventListener("click",(e) => {
+    e.preventDefault()
+    updateItems(array.filter(a => a.tip=="Pasta"))
+})
+pizza.addEventListener("click",(e) => {
+    e.preventDefault()
+    updateItems(array.filter(a => a.tip=="Pizza"))
+})
+burger.addEventListener("click",(e) => {
+    e.preventDefault()
+    updateItems(array.filter(a => a.tip=="Burger"))
+})
+
